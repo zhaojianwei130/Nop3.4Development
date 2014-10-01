@@ -1,0 +1,59 @@
+﻿@model MediaSettingsModel
+@{
+    //page title
+    ViewBag.Title = T("Admin.Configuration.Settings.Media").Text;
+}
+@using (Html.BeginForm())
+{
+    <div class="section-header">
+        <div class="title">
+            <img src="@Url.Content("~/Administration/Content/images/ico-configuration.png")" alt="" />
+            @T("Admin.Configuration.Settings.Media")
+        </div>
+        <div class="options">
+            <input type="submit" name="save" class="k-button" value="@T("Admin.Common.Save")" />
+        </div>
+    </div>
+    @Html.Action("StoreScopeConfiguration", "Setting")
+    @Html.ValidationSummary(false)
+    <table class="adminContent">
+        <tr>
+            <td class="adminTitle">
+                @Html.NopLabelFor(model => model.PicturesStoredIntoDatabase):
+            </td>
+            <td class="adminData">
+                @if (Model.PicturesStoredIntoDatabase)
+                {
+                    @T("Admin.Configuration.Settings.Media.PicturesStoredIntoDatabase.Database")
+                }
+                else
+                {
+                    @T("Admin.Configuration.Settings.Media.PicturesStoredIntoDatabase.FileSystem")
+                }
+
+                <input type="submit" name="change-picture-storage" class="k-button" onclick="return confirm('@T("Admin.Common.AreYouSure")');" value="@T("Admin.Configuration.Settings.Media.PicturesStoredIntoDatabase.Change")" />
+                @T("Admin.Configuration.Settings.Media.PicturesStoredIntoDatabase.Note")
+            </td>
+        </tr>
+        <tr>
+            <td class="adminTitle">
+                @Html.OverrideStoreCheckboxFor(model => model.AvatarPictureSize_OverrideForStore, model => model.AvatarPictureSize, Model.ActiveStoreScopeConfiguration)
+                @Html.NopLabelFor(model => model.AvatarPictureSize):
+            </td>
+            <td class="adminData">
+                @Html.EditorFor(model => model.AvatarPictureSize)
+                @Html.ValidationMessageFor(model => model.AvatarPictureSize)
+            </td>
+        </tr>
+        <tr>
+            <td class="adminTitle">
+                @Html.OverrideStoreCheckboxFor(model => model.MaximumImageSize_OverrideForStore, model => model.MaximumImageSize, Model.ActiveStoreScopeConfiguration)
+                @Html.NopLabelFor(model => model.MaximumImageSize):
+            </td>
+            <td class="adminData">
+                @Html.EditorFor(model => model.MaximumImageSize)
+                @Html.ValidationMessageFor(model => model.MaximumImageSize)
+            </td>
+        </tr>
+    </table>
+}

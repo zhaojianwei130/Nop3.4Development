@@ -1,0 +1,5 @@
+ExternalAuth.OpenId
+ExternalAuth.Facebook
+Misc.WebServices
+Widgets.GoogleAnalytics
+Widgets.NivoSlider

@@ -1,0 +1,34 @@
+﻿@model SitemapModel
+@using Nop.Web.Models.Common;
+@{
+    Layout = "~/Views/Shared/_ColumnsOne.cshtml";
+
+    //title
+    Html.AddTitleParts(T("PageTitle.Sitemap").Text);
+}
+<div class="page sitemap-page">
+    <div class="page-title">
+        <h1>@T("Sitemap")</h1>
+    </div>
+    <div class="page-body">
+        <div class="entity">
+            <div class="entity-body">
+                <ul>
+                    <li><a href="@Url.RouteUrl("ProductSearch")">@T("Search")</a> </li>
+                    @if (Model.NewsEnabled)
+                    {
+                        <li><a href="@Url.RouteUrl("NewsArchive")">@T("News")</a></li>
+                    }
+                    <li><a href="@Url.RouteUrl("CustomerInfo")" class="account">@T("Account.MyAccount")</a></li>
+                    @if (Model.Topics.Count > 0)
+                    {
+                        foreach (var item in Model.Topics)
+                        {
+                            <li><a href="@Url.RouteUrl("Topic", new {Sename = Html.GetTopicSeName(item.SystemName)})">@item.Title</a></li>
+                        }
+                    }
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>

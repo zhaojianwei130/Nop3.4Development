@@ -1,0 +1,35 @@
+﻿@{
+    Layout = "~/Views/Shared/_Root.cshtml";
+}
+
+<div class="leftside-3">
+    @if (IsSectionDefined("left"))
+    {
+        @RenderSection("left")
+    }
+    else
+    {
+        @Html.Widget("left_side_column_before")
+        @Html.Widget("left_side_column_after_category_navigation")
+        @Html.Action("PollBlock", "Poll", new { systemKeyword = "LeftColumnPoll" })
+        @Html.Widget("left_side_column_after")
+    }
+</div>
+<div class="rightside-3">
+    @if (IsSectionDefined("right"))
+    {
+        @RenderSection("right")
+    }
+    else
+    {
+        @Html.Widget("right_side_column_before")
+        @Html.Action("NewsletterBox", "Newsletter")
+        @Html.Action("PollBlock", "Poll", new { systemKeyword = "RightColumnPoll" })
+        @Html.Widget("right_side_column_after")
+    }
+</div>
+<div class="center-3">
+    @Html.Widget("main_column_before")
+    @RenderBody()
+    @Html.Widget("main_column_after")
+</div>
